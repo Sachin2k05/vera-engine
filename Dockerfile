@@ -1,12 +1,9 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM maven:3.9.9-eclipse-temurin-17
 
 WORKDIR /app
 
 COPY . .
 
-# ✅ ADD THIS LINE (IMPORTANT FIX)
-RUN chmod +x mvnw
-
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
